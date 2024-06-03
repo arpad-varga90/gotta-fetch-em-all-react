@@ -1,18 +1,35 @@
 import { useQuery } from "@tanstack/react-query";
-import { useId } from "react";
 import { PokeLocation } from "../Types/types";
+import { useState } from "react";
 
-async function fetchLocation(n: string): Promise<PokeLocation> {
+async function fetchLocation(n: number): Promise<PokeLocation> {
   const URL = "https://pokeapi.co/api/v2/location/";
   const response = await fetch(URL + n);
   const data = await response.json();
   return data;
 }
-export default function Location() {
-  const id = useId();
+export default function Location({ n }: { n: number }) {
   const query = useQuery({
-    queryKey: ["location", id],
-    queryFn: () => fetchLocation("1"),
+    queryKey: ["location", n],
+    queryFn: () => fetchLocation(n),
   });
-  return <h1>{query.data?.names[1].name}</h1>;
+  const [location, setLocation] = useState("");
+
+  if(query.error){
+    return<></>
+  }
+  const hoverOn = function () {
+    setLocation(query.data?.names[1].name);
+  };
+  const hoverOff = function () {
+    setLocation("");
+  };
+
+  return (
+    <div id={query.data?.name}>
+      <span onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+        🔴{location}
+      </span>
+    </div>
+  );
 }
