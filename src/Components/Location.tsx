@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useId } from "react";
-import { PoceLocation } from "../Types/types";
+import { PokeLocation } from "../Types/types";
 
-async function fetchLocation(n: string): Promise<PoceLocation> {
+async function fetchLocation(n: string): Promise<PokeLocation> {
   const URL = "https://pokeapi.co/api/v2/location/";
   const response = await fetch(URL + n);
   const data = await response.json();
-  return data[0];
+  return data;
 }
 export default function Location() {
   const id = useId();
