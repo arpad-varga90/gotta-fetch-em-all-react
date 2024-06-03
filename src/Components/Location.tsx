@@ -8,28 +8,44 @@ async function fetchLocation(n: number): Promise<PokeLocation> {
   const data = await response.json();
   return data;
 }
-export default function Location({ n }: { n: number }) {
+export default function Location({
+  n,
+  coordinates,
+}: {
+  n: number;
+  coordinates: Array<Array<number>>;
+}) {
   const query = useQuery({
     queryKey: ["location", n],
     queryFn: () => fetchLocation(n),
   });
-  const [location, setLocation] = useState("");
+  const [pointer, setPointer] = useState("🔴");
+  const [locationCard,setLocationCard] = useState(<></>)
 
-  if(query.error){
-    return<></>
+  if (query.error) {
+    return <></>;
   }
   const hoverOn = function () {
-    setLocation(query.data?.names[1].name);
+    setLocationCard(<span className="text-white	text-2xl bg-red-700 p-2 " >{query.data?.names[1].name}</span>)
+    setPointer("")
   };
   const hoverOff = function () {
-    setLocation("");
+    setLocationCard(<></>)
+    setPointer("🔴")
   };
 
+  const x = `${coordinates[n - 1][0]/2170*100}%`;
+  const y = `${coordinates[n - 1][1]/2520*100}%`;
+
   return (
-    <div id={query.data?.name}>
-      <span onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
-        🔴{location}
-      </span>
+    <div
+      id={query.data?.name}
+      style={{ transform: "translate(-50%, -50%)", position: "absolute", top: x, left: y}}
+    >
+      <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+        <span className="text-2xl">{pointer}</span>
+        {locationCard}
+      </div>
     </div>
   );
 }
