@@ -1,6 +1,6 @@
 import Location from "./Location";
 import imgUrl from "../assets/PokeMap.png";
-import { coordinates } from "../data/coordinates";
+import { coordinates, mapPins} from "../data/coordinates";
 
 
 export default function Map() {
@@ -9,7 +9,7 @@ export default function Map() {
     >
       <img src={imgUrl} alt="PokeMap" />
       {[...Array(20).keys()].map((i) => {
-        return <Location key={i + 1} n={i + 1} coordinates={coordinates} />;
+        return <Location key={i + 1} n={i + 1} coordinates={coordinates} mapPins={mapPins} />;
       })}
     </div>
   );

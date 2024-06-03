@@ -11,15 +11,17 @@ async function fetchLocation(n: number): Promise<PokeLocation> {
 export default function Location({
   n,
   coordinates,
+  mapPins
 }: {
   n: number;
   coordinates: Array<Array<number>>;
+  mapPins: Array<string>
 }) {
   const query = useQuery({
     queryKey: ["location", n],
     queryFn: () => fetchLocation(n),
   });
-  const [pointer, setPointer] = useState("🔴");
+  const [pointer, setPointer] = useState(mapPins[n-1]);
   const [locationCard,setLocationCard] = useState(<></>)
 
   if (query.error) {
@@ -31,7 +33,7 @@ export default function Location({
   };
   const hoverOff = function () {
     setLocationCard(<></>)
-    setPointer("🔴")
+    setPointer(mapPins[n-1])
   };
 
   const x = `${coordinates[n - 1][0]/2170*100}%`;
@@ -43,7 +45,7 @@ export default function Location({
       style={{ transform: "translate(-50%, -50%)", position: "absolute", top: x, left: y}}
     >
       <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
-        <span className="text-2xl">{pointer}</span>
+        <span className="text-xl">{pointer}</span>
         {locationCard}
       </div>
     </div>
