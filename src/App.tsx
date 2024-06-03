@@ -1,10 +1,11 @@
-import Location from "./Components/Location";
+import Map from "./Components/Map"
+
+
 export default function App() {
   return (
     <div>
-      {[...Array(20).keys()].map((i) => {
-        return <Location n={i + 1} />;
-      })}
+      <Map/>
     </div>
+      
   );
 }
