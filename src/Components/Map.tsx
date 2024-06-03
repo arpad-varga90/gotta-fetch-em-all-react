@@ -7,7 +7,7 @@ export default function Map() {
   return (
     <div className="relative "
     >
-      <img src={imgUrl} alt="PokeMap" />
+      <img src={imgUrl} alt="PokeMap" className="size-full"/>
       {[...Array(20).keys()].map((i) => {
         return <Location key={i + 1} n={i + 1} coordinates={coordinates} mapPins={mapPins} />;
       })}
