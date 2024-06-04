@@ -10,7 +10,7 @@ export default function App() {
 
   if (locationSelection) {
     return (
-      <div onClick={()=>{setLocationSelection(false)}}>
+      <div onClick={()=>{setLocationSelection(false); setLocationNumber(Math.floor(Math.random()*20))}}>
         <Map />
       </div>
     );
