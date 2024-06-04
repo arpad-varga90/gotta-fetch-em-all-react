@@ -5,8 +5,8 @@ import { useState } from "react";
 
 export default function App() {
   
-  const [locationSelection, setLocationSelection] = useState(true);
-  const [locationNumber, setLocationNumber] = useState(null);
+  const [locationSelection, setLocationSelection] = useState(false);
+  const [locationNumber, setLocationNumber] = useState(Math.floor(Math.random()*20));
 
   if (locationSelection) {
     return (
@@ -15,9 +15,11 @@ export default function App() {
       </div>
     );
   } else {
+    {console.log(locationNumber)}
     return (
       <div>
         <Fight n={locationNumber} />
+        
       </div>
     );
   }
