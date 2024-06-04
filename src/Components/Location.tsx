@@ -59,6 +59,7 @@ export default function Location({
       }}
     >
       <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+        <span className="text-xl text-black bg-white">{locationNumber}</span>
         <span className="text-xl">{pointer}</span>
         {locationCard}
       </div>
