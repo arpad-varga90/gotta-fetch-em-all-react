@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
 import { gifUrl } from "../data/backgrounds";
 
-export default function Fight({ n }: { n: number }): React.ReactNode {
+export default function Fight({
+  activeLocationNumber,
+  onClose,
+}: {
+  activeLocationNumber: number;
+  onClose: () => void;
+}): React.ReactNode {
   const [background, setBackground] = useState("");
   useEffect(() => {
-    setBackground(gifUrl[n]);
-  }, [n]);
+    setBackground(gifUrl[activeLocationNumber]);
+  }, [activeLocationNumber]);
   return (
-    <div className="relative ">
+    <div onClick={onClose} className="relative ">
       <img src={background} alt="background" className="size-full" />
       <div
         style={{
