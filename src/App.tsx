@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function App() {
   
-  const [locationSelection, setLocationSelection] = useState(false);
+  const [locationSelection, setLocationSelection] = useState(true);
   const [locationNumber, setLocationNumber] = useState(Math.floor(Math.random()*20));
 
   if (locationSelection) {
