@@ -12,17 +12,11 @@ export default function Fight({
   useEffect(() => {
     setBackground(gifUrl[activeLocationNumber]);
   }, [activeLocationNumber]);
+
   return (
-    <div onClick={onClose} className="relative ">
+    <div onClick={onClose} className="relative">
       <img src={background} alt="background" className="size-full" />
-      <div
-        style={{
-          transform: "translate(-50%, -50%)",
-          position: "absolute",
-          top: "15%",
-          left: "50%",
-        }}
-      >
+      <div className="fight-stage-bg">
         <h1 className="text-5xl text-black bg-white p-2"> GAME PAHSE </h1>
       </div>
     </div>
