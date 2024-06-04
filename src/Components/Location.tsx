@@ -9,19 +9,21 @@ async function fetchLocation(n: number): Promise<PokeLocation> {
   return data;
 }
 export default function Location({
-  n,
+  locationNumber,
   coordinates,
   mapPins,
+  onSelectLocation,
 }: {
-  n: number;
+  locationNumber: number;
   coordinates: Array<Array<number>>;
   mapPins: Array<string>;
+  onSelectLocation: () => void;
 }) {
   const query = useQuery({
-    queryKey: ["location", n],
-    queryFn: () => fetchLocation(n),
+    queryKey: ["location", locationNumber],
+    queryFn: () => fetchLocation(locationNumber),
   });
-  const [pointer, setPointer] = useState(mapPins[n - 1]);
+  const [pointer, setPointer] = useState(mapPins[locationNumber - 1]);
   const [locationCard, setLocationCard] = useState(<></>);
 
   if (query.error) {
@@ -29,7 +31,10 @@ export default function Location({
   }
   const hoverOn = function () {
     setLocationCard(
-      <span className="text-white	text-2xl bg-red-700 p-2 ">
+      <span
+        onClick={onSelectLocation}
+        className="text-white	text-2xl bg-red-700 p-2 "
+      >
         {query.data?.names[1].name}
       </span>
     );
@@ -37,11 +42,11 @@ export default function Location({
   };
   const hoverOff = function () {
     setLocationCard(<></>);
-    setPointer(mapPins[n - 1]);
+    setPointer(mapPins[locationNumber - 1]);
   };
 
-  const x = `${(coordinates[n - 1][0] / 2170) * 100}%`;
-  const y = `${(coordinates[n - 1][1] / 2520) * 100}%`;
+  const x = `${(coordinates[locationNumber - 1][0] / 2170) * 100}%`;
+  const y = `${(coordinates[locationNumber - 1][1] / 2520) * 100}%`;
 
   return (
     <div

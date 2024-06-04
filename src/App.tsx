@@ -2,22 +2,36 @@ import Map from "./Components/Map";
 import Fight from "./Components/Fight";
 import { useState } from "react";
 
-
 export default function App() {
-  
-  const [locationSelection, setLocationSelection] = useState(true);
-  const [locationNumber, setLocationNumber] = useState(Math.floor(Math.random()*20));
+  const [locationSelectionState, setLocationSelectionState] = useState(true);
+  const [fightState, setFightState] = useState(false);
+  //const [pocket, setPocket] = useState([]);
+  // const [activeLocations,setActiveLocations] = useState("")
+  const [activeLocationNumber, setActiveLocationNumber] = useState(0);
 
-  if (locationSelection) {
+  if (locationSelectionState) {
     return (
-      <div onClick={()=>{setLocationSelection(false); setLocationNumber(Math.floor(Math.random()*20))}}>
-        <Map />
+      <div>
+        <Map
+          onSelectLocation={(n) => {
+            setActiveLocationNumber(n);
+            setLocationSelectionState(false);
+            setFightState(true);
+          }}
+        />
       </div>
     );
-  } else {
+  }
+  if (fightState) {
     return (
-      <div onClick={()=>{setLocationSelection(true)}}>
-        <Fight n={locationNumber} />
+      <div>
+        <Fight
+          onClose={() => {
+            setFightState(false);
+            setLocationSelectionState(true);
+          }}
+          activeLocationNumber={activeLocationNumber}
+        />
       </div>
     );
   }
