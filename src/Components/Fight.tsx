@@ -10,7 +10,7 @@ export default function Fight({
 }): React.ReactNode {
   const [background, setBackground] = useState("");
   useEffect(() => {
-    setBackground(gifUrl[activeLocationNumber]);
+    setBackground(gifUrl[activeLocationNumber-1]);
   }, [activeLocationNumber]);
   return (
     <div onClick={onClose} className="relative ">

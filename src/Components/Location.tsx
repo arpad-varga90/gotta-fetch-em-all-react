@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokeLocation } from "../Types/types";
 import { useState } from "react";
+import { coordinates, mapPins } from "../data/coordinates";
 
 async function fetchLocation(n: number): Promise<PokeLocation> {
   const URL = "https://pokeapi.co/api/v2/location/";
@@ -10,13 +11,9 @@ async function fetchLocation(n: number): Promise<PokeLocation> {
 }
 export default function Location({
   locationNumber,
-  coordinates,
-  mapPins,
   onSelectLocation,
 }: {
   locationNumber: number;
-  coordinates: Array<Array<number>>;
-  mapPins: Array<string>;
   onSelectLocation: () => void;
 }) {
   const query = useQuery({
@@ -59,7 +56,6 @@ export default function Location({
       }}
     >
       <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
-        <span className="text-xl text-black bg-white">{locationNumber}</span>
         <span className="text-xl">{pointer}</span>
         {locationCard}
       </div>

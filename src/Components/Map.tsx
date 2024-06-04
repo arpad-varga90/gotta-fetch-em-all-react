@@ -1,6 +1,5 @@
 import Location from "./Location";
 import imgUrl from "../assets/PokeMap.png";
-import { coordinates, mapPins } from "../data/coordinates";
 
 export default function Map({
   onSelectLocation,
@@ -15,8 +14,6 @@ export default function Map({
           <Location
             key={i + 1}
             locationNumber={i + 1}
-            coordinates={coordinates}
-            mapPins={mapPins}
             onSelectLocation={() => onSelectLocation(i + 1)}
           />
         );
