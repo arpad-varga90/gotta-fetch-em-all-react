@@ -10,16 +10,14 @@ export default function App() {
 
   if (locationSelection) {
     return (
-      <div>
+      <div onClick={()=>{setLocationSelection(false)}}>
         <Map />
       </div>
     );
   } else {
-    {console.log(locationNumber)}
     return (
-      <div>
+      <div onClick={()=>{setLocationSelection(true)}}>
         <Fight n={locationNumber} />
-        
       </div>
     );
   }
