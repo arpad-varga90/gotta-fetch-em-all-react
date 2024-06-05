@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokemonDetails } from "../Types/types";
+import { getRandNumber } from "../data/utils";
 
 async function fetchPokeDetails(): Promise<PokemonDetails> {
   const id = getRandNumber(1, 1025);
