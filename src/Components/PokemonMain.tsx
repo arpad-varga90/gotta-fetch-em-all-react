@@ -54,6 +54,19 @@ export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
               isVisible ? "visible" : "invisible"
             }`}
           >
+            <div className="text-center pb-4">Details</div>
+            <div className="grid grid-cols-2">
+              <div className="grid grid-rows-3">
+                <div className="">HP:</div>
+                <div className="">Attack:</div>
+                <div className="">Defense:</div>
+              </div>
+              <div className="grid grid-rows-3 text-right pr-6">
+                <div className="">{data.stats[0].base_stat}</div>
+                <div className="">{data.stats[1].base_stat}</div>
+                <div className="">{data.stats[2].base_stat}</div>
+              </div>
+            </div>
           </div>
         </div>
       )}
