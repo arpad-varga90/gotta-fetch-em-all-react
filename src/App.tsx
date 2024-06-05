@@ -5,9 +5,11 @@ import { useState } from "react";
 export default function App() {
   const [locationSelectionState, setLocationSelectionState] = useState(true);
   const [fightState, setFightState] = useState(false);
-  //const [pocket, setPocket] = useState([]);
+  const [pocket, setPocket] = useState([1,6,61]);
   // const [activeLocations,setActiveLocations] = useState("")
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
+
+  console.log(pocket)
 
   if (locationSelectionState) {
     return (
@@ -26,7 +28,8 @@ export default function App() {
     return (
       <div>
         <Fight
-          onClose={() => {
+          onClose={(newPocket) => {
+            setPocket(newPocket);
             setFightState(false);
             setLocationSelectionState(true);
           }}
