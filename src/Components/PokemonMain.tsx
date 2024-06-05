@@ -1,25 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokemonDetails } from "../Types/types";
-import { getRandNumber } from "../data/utils";
 
-async function fetchPokeDetails(): Promise<PokemonDetails> {
-  const id = getRandNumber(1, 1025);
+async function fetchPokeDetails(id: number): Promise<PokemonDetails> {
   const URL = "https://pokeapi.co/api/v2/pokemon/";
   const response = await fetch(URL + id);
   const data = response.json();
   return data;
 }
 
-function usePokemon() {
+function usePokemon(id: number) {
   return useQuery({
-    queryKey: ["pokemon"],
-    queryFn: fetchPokeDetails,
+    queryKey: ["pokemon", id],
+    queryFn: () => fetchPokeDetails(id),
     refetchOnWindowFocus: false,
   });
 }
 
-export default function PokemonMain() {
-  const { error, isSuccess, isLoading, data } = usePokemon();
+export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
+  const { error, isSuccess, isLoading, data } = usePokemon(pokemonId);
   return (
     <div className="absolute inset-0 flex justify-center items-center z-10">
       {error && <h1>Something went wrong</h1>}
