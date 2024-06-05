@@ -11,28 +11,24 @@ export default function App() {
 
   if (locationSelectionState) {
     return (
-      <div>
-        <Map
-          onSelectLocation={(n) => {
-            setActiveLocationNumber(n);
-            setLocationSelectionState(false);
-            setFightState(true);
-          }}
-        />
-      </div>
+      <Map
+        onSelectLocation={(n) => {
+          setActiveLocationNumber(n);
+          setLocationSelectionState(false);
+          setFightState(true);
+        }}
+      />
     );
   }
   if (fightState) {
     return (
-      <div>
-        <Fight
-          onClose={() => {
-            setFightState(false);
-            setLocationSelectionState(true);
-          }}
-          activeLocationNumber={activeLocationNumber}
-        />
-      </div>
+      <Fight
+        onClose={() => {
+          setFightState(false);
+          setLocationSelectionState(true);
+        }}
+        activeLocationNumber={activeLocationNumber}
+      />
     );
   }
 }
