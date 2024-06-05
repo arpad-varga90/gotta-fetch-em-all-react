@@ -27,6 +27,9 @@ export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
           Something went wrong...
         </h1>
       )}
+
+      {isLoading && <h1 className="bg-blue-100 rounded-lg text-blue-900">Loading...</h1>}
+
       {isSuccess && (
         <div className="card justify-between bg-slate-50/75 w-1/4 h-5/6">
           <h1 className="text-wrap text-center p-2">
