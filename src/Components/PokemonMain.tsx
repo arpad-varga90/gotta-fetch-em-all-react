@@ -22,9 +22,11 @@ export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <div className="absolute inset-0 flex justify-center items-center z-10">
-      {error && <h1>Something went wrong</h1>}
-      {isLoading && <h1>Loading...</h1>}
+      {error && (
+        <h1 className="warning-message">
+          Something went wrong...
+        </h1>
+      )}
       {isSuccess && (
         <div className="card justify-between bg-slate-50/75 w-1/4 h-5/6">
           <h1 className="text-wrap text-center p-2">
