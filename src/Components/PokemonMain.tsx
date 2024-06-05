@@ -28,6 +28,23 @@ export default function PokemonMain() {
           <h1 className="text-4xl text-center pb-5">
             {data.name.toUpperCase()}
           </h1>
+          <div className="flex flex-col justify-evenly px-5 pb-5">
+            {data.sprites.other.dream_world.front_default ? (
+              <img
+                src={data.sprites.other.dream_world.front_default}
+                alt="Picture of the opponent"
+                className="max-h-fit"
+              />
+            ) : data.sprites.front_default ? (
+              <img
+                src={data.sprites.front_default}
+                alt="Picture of the opponent"
+                className="max-h-fit"
+              />
+            ) : (
+              <h1>Sorry, no image to this Pokemon</h1>
+            )}
+          </div>
         </div>
       )}
     </div>
