@@ -7,7 +7,13 @@ export type PokeLocation = {
 export type PokemonDetails = {
   id: number;
   name: string;
-  stats: Array<{
-    [key: number]: { base_stat: number; stat: { name: string } };
-  }>;
+  stats: Array<{ base_stat: number; stat: { name: string } }>;
+  sprites: {
+    front_default: string;
+    other: {
+      dream_world: {
+        front_default: string;
+      };
+    };
+  };
 };
