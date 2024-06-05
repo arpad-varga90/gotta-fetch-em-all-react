@@ -25,11 +25,12 @@ export default function PokemonMain() {
       {error && <h1>Something went wrong</h1>}
       {isLoading && <h1>Loading...</h1>}
       {isSuccess && (
-        <div className="card bg-slate-50/75 w-1/4 h-5/6">
-          <h1 className="text-4xl text-center pb-5">
+        <div className="card justify-between bg-slate-50/75 w-1/4 h-5/6">
+          <h1 className="text-wrap text-center p-2">
             {data.name.toUpperCase()}
           </h1>
-          <div className="flex flex-col justify-evenly px-5 pb-5">
+
+          <div className="bg-blue-100 border-2 rounded-lg h-60 p-2 mx-2">
             {data.sprites.other.dream_world.front_default ? (
               <img
                 src={data.sprites.other.dream_world.front_default}
@@ -45,6 +46,30 @@ export default function PokemonMain() {
             ) : (
               <h1>Sorry, no image to this Pokemon</h1>
             )}
+          </div>
+
+          <div className="px-2 mb-10">
+            <table className="table-fixed">
+              <thead>
+                <tr>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hp:</td>
+                  <td>{data.stats[0].base_stat}</td>
+                </tr>
+                <tr>
+                  <td>Damage:</td>
+                  <td>{data.stats[1].base_stat}</td>
+                </tr>
+                <tr>
+                  <td>Defense:</td>
+                  <td>{data.stats[2].base_stat}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       )}
