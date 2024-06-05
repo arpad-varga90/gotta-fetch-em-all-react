@@ -12,7 +12,7 @@ async function fetchPokeDetails(): Promise<PokemonDetails> {
 
 function usePokemon() {
   return useQuery({
-    queryKey: ["todos"],
+    queryKey: ["pokemon"],
     queryFn: fetchPokeDetails,
     refetchOnWindowFocus: false,
   });
