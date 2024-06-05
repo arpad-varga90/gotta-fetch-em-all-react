@@ -19,6 +19,7 @@ export default function Location({
   const query = useQuery({
     queryKey: ["location", locationNumber],
     queryFn: () => fetchLocation(locationNumber),
+    refetchOnWindowFocus: false
   });
   const [pointer, setPointer] = useState(mapPins[locationNumber - 1]);
   const [locationCard, setLocationCard] = useState(<></>);
@@ -30,7 +31,7 @@ export default function Location({
     setLocationCard(
       <span
         onClick={onSelectLocation}
-        className="text-white	text-2xl bg-red-700 p-2 "
+        className="text-white	text-2xl bg-red-700 p-2 z-10 "
       >
         {query.data?.names[1].name}
       </span>

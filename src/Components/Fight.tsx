@@ -23,7 +23,7 @@ export default function Fight({
           left: "50%",
         }}
       >
-        <h1 className="text-5xl text-black bg-white p-2"> GAME PAHSE </h1>
+        <h1 className="text-5xl text-black bg-white p-2"> GAME PHASE </h1>
       </div>
     </div>
   );
