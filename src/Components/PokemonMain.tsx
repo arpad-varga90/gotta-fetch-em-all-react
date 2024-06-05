@@ -19,4 +19,17 @@ function usePokemon() {
 
 export default function PokemonMain() {
   const { error, isSuccess, isLoading, data } = usePokemon();
+  return (
+    <div className="absolute inset-0 flex justify-center items-center z-10">
+      {error && <h1>Something went wrong</h1>}
+      {isLoading && <h1>Loading...</h1>}
+      {isSuccess && (
+        <div className="card bg-slate-50/75 w-1/4 h-5/6">
+          <h1 className="text-4xl text-center pb-5">
+            {data.name.toUpperCase()}
+          </h1>
+        </div>
+      )}
+    </div>
+  );
 }
