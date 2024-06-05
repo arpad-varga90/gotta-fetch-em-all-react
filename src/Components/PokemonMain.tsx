@@ -34,13 +34,13 @@ export default function PokemonMain() {
               <img
                 src={data.sprites.other.dream_world.front_default}
                 alt="Picture of the opponent"
-                className="max-h-fit"
+                className="size-full"
               />
             ) : data.sprites.front_default ? (
               <img
                 src={data.sprites.front_default}
                 alt="Picture of the opponent"
-                className="max-h-fit"
+                className="size-full"
               />
             ) : (
               <h1>Sorry, no image to this Pokemon</h1>
