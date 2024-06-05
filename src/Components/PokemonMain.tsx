@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokemonDetails } from "../Types/types";
+import { useState } from "react";
 
 async function fetchPokeDetails(id: number): Promise<PokemonDetails> {
   const URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -18,6 +19,8 @@ function usePokemon(id: number) {
 
 export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
   const { error, isSuccess, isLoading, data } = usePokemon(pokemonId);
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
     <div className="absolute inset-0 flex justify-center items-center z-10">
       {error && <h1>Something went wrong</h1>}
@@ -45,29 +48,12 @@ export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
               <h1>Sorry, no image to this Pokemon</h1>
             )}
           </div>
-
-          <div className="px-2 mb-10">
-            <table className="table-fixed">
-              <thead>
-                <tr>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Hp:</td>
-                  <td>{data.stats[0].base_stat}</td>
-                </tr>
-                <tr>
-                  <td>Damage:</td>
-                  <td>{data.stats[1].base_stat}</td>
-                </tr>
-                <tr>
-                  <td>Defense:</td>
-                  <td>{data.stats[2].base_stat}</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Stats */}
+          <div
+            className={`grid grid-cols-1 my-6 mx-8 ${
+              isVisible ? "visible" : "invisible"
+            }`}
+          >
           </div>
         </div>
       )}
