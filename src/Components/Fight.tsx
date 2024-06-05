@@ -1,6 +1,7 @@
 import { gifUrl } from "../data/backgrounds";
 import PokemonMain from "./PokemonMain";
 import Battle from "./Battle";
+import { useState } from "react";
 
 export default function Fight({
   activeLocationNumber,
@@ -9,6 +10,12 @@ export default function Fight({
   activeLocationNumber: number;
   onClose: (newPocket: number[]) => void;
 }) {
+
+  const [message,setMessage]=useState("")
+  const [enemyActualHP,setEnemyActualHP]=useState(0)
+  const [playerActualHP,setPlayerActualHP]=useState(0)
+
+
   return (
     <div>
       <div className="flex justify-center items-center">
@@ -32,8 +39,14 @@ export default function Fight({
         playerAttack={65}
         onClose={(newPocket) => {
           onClose(newPocket);
-        }}
+        }
+      }
+      onHPChange={(newEnemyHP,newPlayerHP)=>{setEnemyActualHP(newEnemyHP);setPlayerActualHP(newPlayerHP)}}
+      onMessage={(a)=>{setMessage(a)}}
       />
+      <p>newPlayerHP: {playerActualHP}</p>
+      <p>newEnemyHP: {enemyActualHP}</p>
+      <p>Message: {message}</p>
     </div>
   );
 }
