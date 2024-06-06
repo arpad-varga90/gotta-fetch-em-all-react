@@ -4,7 +4,7 @@ import imgUrl from "../assets/PokeMap.png";
 export default function Map({
   onSelectLocation,
 }: {
-  onSelectLocation: (n: number) => void;
+  onSelectLocation: (n: number,name:string) => void;
 }) {
   return (
     <div className="relative ">
@@ -14,7 +14,7 @@ export default function Map({
           <Location
             key={i + 1}
             locationNumber={i + 1}
-            onSelectLocation={() => onSelectLocation(i + 1)}
+            onSelectLocation={(name) => onSelectLocation(i + 1,name)}
           />
         );
       })}

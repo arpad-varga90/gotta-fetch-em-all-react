@@ -7,22 +7,25 @@ export default function App() {
   const [locationSelectionState, setLocationSelectionState] = useState(true);
   const [fightState, setFightState] = useState(false);
   const [pocket, setPocket] = useState([1, 6, 61]);
-  // const [activeLocations,setActiveLocations] = useState("")
+  const [pokemonSelectionState, setPokemonSelectionState] = useState(true);
+  const [activeLocations,setActiveLocations] = useState("")
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
-
-  console.log(pocket);
 
   if (locationSelectionState) {
     return (
       <div>
         <Map
-          onSelectLocation={(n) => {
+          onSelectLocation={(n, name) => {
             setActiveLocationNumber(n);
+            setActiveLocations(name);
             setLocationSelectionState(false);
             setFightState(true);
           }}
         />
-        <Pocket pocket={pocket} />
+        <Pocket
+          pocket={pocket}
+          onSelect={()=>{}}
+        />
       </div>
     );
   }
@@ -31,14 +34,28 @@ export default function App() {
       <div>
         <Fight
           onClose={(newPocket) => {
-          setPocket([...newPocket]);
-          console.log(newPocket)
+            setPocket([...newPocket]);
             setFightState(false);
             setLocationSelectionState(true);
+            setPokemonSelectionState(true)
           }}
           activeLocationNumber={activeLocationNumber}
+          activeLocationName={activeLocations}
+          pocket={pocket}
         />
-        <Pocket pocket={pocket} />
+        <Pocket
+          pocket={pocket}
+          onSelect={(id) => {
+            setPokemonSelectionState(false)
+            if (pokemonSelectionState) {
+              setPocket([
+                ...pocket.filter((item) => {
+                  return item !== id;
+                }),
+              ]);
+            }
+          }}
+        />
       </div>
     );
   }

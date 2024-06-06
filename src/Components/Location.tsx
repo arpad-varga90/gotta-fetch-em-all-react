@@ -14,7 +14,7 @@ export default function Location({
   onSelectLocation,
 }: {
   locationNumber: number;
-  onSelectLocation: () => void;
+  onSelectLocation: (locationName:string) => void;
 }) {
   const query = useQuery({
     queryKey: ["location", locationNumber],
@@ -30,7 +30,7 @@ export default function Location({
   const hoverOn = function () {
     setLocationCard(
       <span
-        onClick={onSelectLocation}
+        onClick={()=>onSelectLocation(query.data?.names[1].name as string)}
         className="text-white	text-2xl bg-red-700 p-2 z-10 "
       >
         {query.data?.names[1].name}
