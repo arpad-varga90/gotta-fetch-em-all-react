@@ -8,15 +8,16 @@ export default function App() {
   const [fightState, setFightState] = useState(false);
   const [pocket, setPocket] = useState([1, 6, 61]);
   const [pokemonSelectionState, setPokemonSelectionState] = useState(true);
-  // const [activeLocations,setActiveLocations] = useState("")
+  const [activeLocations,setActiveLocations] = useState("")
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
 
   if (locationSelectionState) {
     return (
       <div>
         <Map
-          onSelectLocation={(n) => {
+          onSelectLocation={(n, name) => {
             setActiveLocationNumber(n);
+            setActiveLocations(name);
             setLocationSelectionState(false);
             setFightState(true);
           }}
@@ -39,6 +40,7 @@ export default function App() {
             setPokemonSelectionState(true)
           }}
           activeLocationNumber={activeLocationNumber}
+          activeLocationName={activeLocations}
         />
         <Pocket
           pocket={pocket}

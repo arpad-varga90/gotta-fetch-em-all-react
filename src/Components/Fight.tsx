@@ -12,9 +12,11 @@ function randNum(): number {
 
 export default function Fight({
   activeLocationNumber,
+  activeLocationName,
   onClose,
 }: {
   activeLocationNumber: number;
+  activeLocationName: string;
   onClose: (newPocket: number[]) => void;
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(0);
@@ -26,6 +28,7 @@ export default function Fight({
 
   return (
     <div className="full-width-1024px text-black">
+      <h1>{activeLocationName}</h1>
       <img
         src={gifUrl[activeLocationNumber - 1]}
         alt="background"
