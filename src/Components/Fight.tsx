@@ -31,22 +31,23 @@ export default function Fight({
   activeLocationNumber,
   activeLocationName,
   pocket,
+  selectedPokemonId,
   onClose,
 }: {
   activeLocationNumber: number;
   activeLocationName: string;
   pocket: number[];
+  selectedPokemonId: number;
   onClose: (newPocket: number[]) => void;
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(-10);
   const [playerActualHP, setPlayerActualHP] = useState(-10);
   const [demageToEnemy, setDemageToEnemy] = useState(0);
   const [demageToPlayer, setDemageToPlayer] = useState(0);
-  const [selectedPokemon, setSelectedPokemon] = useState(7);
 
   const randomNumber = useRef(randNum());
   const enemyData = usePokemon(randomNumber.current);
-  const playerData = usePokemon(selectedPokemon);
+  const playerData = usePokemon(selectedPokemonId);
 
   return (
     <div className="full-width-1024px text-black">
@@ -97,9 +98,9 @@ export default function Fight({
           <div className="grid grid-cols-1">
             {enemyData.isSuccess && playerData.isSuccess && (
               <Battle
-              actualPocket={pocket}
+                actualPocket={pocket}
                 player={{
-                  id: selectedPokemon,
+                  id: selectedPokemonId,
                   hp: playerData.data.stats[0].base_stat,
                   attack: playerData.data.stats[1].base_stat,
                   defense: playerData.data.stats[2].base_stat,
