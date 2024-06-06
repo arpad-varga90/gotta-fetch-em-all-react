@@ -9,8 +9,8 @@ export default function Pocket({
 }) {
   return (
     <footer>
-      <h2>POCKET:</h2>
-      <div className="flex flex-row">
+      <h2 className="text-center my-2 py-1">POCKET:</h2>
+      <div className="flex flex-row flex-wrap gap-3 h-auto">
         {pocket.map((id) => (
           <PokemonPocket
             key={id}
