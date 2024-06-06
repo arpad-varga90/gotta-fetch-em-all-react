@@ -1,35 +1,44 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokemonDetails } from "../Types/types";
-import { getRandNumber } from "../data/utils";
+import { useState } from "react";
 
-async function fetchPokeDetails(): Promise<PokemonDetails> {
-  const id = getRandNumber(1, 1025);
+async function fetchPokeDetails(id: number): Promise<PokemonDetails> {
   const URL = "https://pokeapi.co/api/v2/pokemon/";
   const response = await fetch(URL + id);
   const data = response.json();
   return data;
 }
 
-function usePokemon() {
+function usePokemon(id: number) {
   return useQuery({
-    queryKey: ["pokemon"],
-    queryFn: fetchPokeDetails,
+    queryKey: ["pokemon", id],
+    queryFn: () => fetchPokeDetails(id),
     refetchOnWindowFocus: false,
   });
 }
 
-export default function PokemonMain() {
-  const { error, isSuccess, isLoading, data } = usePokemon();
+export default function PokemonMain({ pokemonId }: { pokemonId: number }) {
+  const { error, isSuccess, isLoading, data } = usePokemon(pokemonId);
+  const [isVisible, setIsVisible] = useState(true);
+
   return (
-    <div className="absolute inset-0 flex justify-center items-center z-10">
-      {error && <h1>Something went wrong</h1>}
-      {isLoading && <h1>Loading...</h1>}
+    <>
+      {error && (
+        <h1 className="warning-message">
+          Something went wrong...
+        </h1>
+      )}
+
+      {isLoading && <h1 className="bg-blue-100 rounded-lg text-blue-900">Loading...</h1>}
+
       {isSuccess && (
-        <div className="card bg-slate-50/75 w-1/4 h-5/6">
-          <h1 className="text-4xl text-center pb-5">
+        <div className="card justify-between bg-slate-50/75">
+          {/* Name */}
+          <h1 className="poke-details-header">
             {data.name.toUpperCase()}
           </h1>
-          <div className="flex flex-col justify-evenly px-5 pb-5">
+          {/* Image */}
+          <div className="bg-blue-100 rounded-lg h-60 p-2 mx-4">
             {data.sprites.other.dream_world.front_default ? (
               <img
                 src={data.sprites.other.dream_world.front_default}
@@ -46,8 +55,28 @@ export default function PokemonMain() {
               <h1>Sorry, no image to this Pokemon</h1>
             )}
           </div>
+          {/* Stats */}
+          <div
+            className={`grid grid-cols-1 my-6 mx-8 ${
+              isVisible ? "visible" : "invisible"
+            }`}
+          >
+            <div className="text-center pb-4">Details</div>
+            <div className="grid grid-cols-2">
+              <div className="grid grid-rows-3">
+                <div className="">HP:</div>
+                <div className="">Attack:</div>
+                <div className="">Defense:</div>
+              </div>
+              <div className="grid grid-rows-3 text-right pr-6">
+                <div className="">{data.stats[0].base_stat}</div>
+                <div className="">{data.stats[1].base_stat}</div>
+                <div className="">{data.stats[2].base_stat}</div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
