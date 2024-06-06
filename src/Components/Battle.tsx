@@ -62,7 +62,7 @@ export default function Battle({
   }
 
   return (
-    <div >
+    <div className="card justify-between bg-slate-50/75 p-5">
       <h1>BATTLE</h1>
       {attackState === 1 ? (
         <>
