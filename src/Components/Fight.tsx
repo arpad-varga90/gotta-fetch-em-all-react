@@ -13,10 +13,12 @@ function randNum(): number {
 export default function Fight({
   activeLocationNumber,
   activeLocationName,
+  pocket,
   onClose,
 }: {
   activeLocationNumber: number;
   activeLocationName: string;
+  pocket: number[];
   onClose: (newPocket: number[]) => void;
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(0);
@@ -42,7 +44,7 @@ export default function Fight({
           </div>
           <div className="grid grid-cols-1">
             <Battle
-              actualPocket={[1, 6]}
+              actualPocket={pocket}
               player={{
                 id: 61,
                 name: "name-of-player",

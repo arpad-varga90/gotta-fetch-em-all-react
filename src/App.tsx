@@ -41,6 +41,7 @@ export default function App() {
           }}
           activeLocationNumber={activeLocationNumber}
           activeLocationName={activeLocations}
+          pocket={pocket}
         />
         <Pocket
           pocket={pocket}
