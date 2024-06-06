@@ -6,7 +6,7 @@ import Pocket from "./Components/Pocket";
 export default function App() {
   const [locationSelectionState, setLocationSelectionState] = useState(true);
   const [fightState, setFightState] = useState(false);
-  const [pocket, setPocket] = useState([1, 6, 61]);
+  const [pocket, setPocket] = useState([1, 6, 61, 644]);
   const [pokemonSelectionState, setPokemonSelectionState] = useState(true);
   const [selectedPokemonId, setSelectedPokemonId] = useState(0);
   const [activeLocations, setActiveLocations] = useState("");

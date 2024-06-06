@@ -65,7 +65,7 @@ export default function Battle({
     <div className="card justify-between bg-slate-50/75 p-5">
       {attackState === 1 ? (
         <>
-          <button className="btn btn-outline btn-primary"
+          <button className="btn btn-outline btn-primary cursor-poke-full"
             onClick={() => {
               setAttackState(2)
               onSetMessage("START THE FIGHT, HIT ATTACK");
@@ -76,7 +76,7 @@ export default function Battle({
         </>
       ) : attackState === 2 ? (
         <>
-          <button className="btn btn-outline btn-error"
+          <button className="btn btn-outline btn-error cursor-poke-full"
             onClick={() => {
               fight();
             }}
@@ -86,7 +86,7 @@ export default function Battle({
         </>
       ) : (
         <>
-          <button className="btn btn-outline btn-accent"
+          <button className="btn btn-outline btn-accent cursor-poke-full"
             onClick={() => {
               onClose(newPocket);
             }}
