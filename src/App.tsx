@@ -10,6 +10,8 @@ export default function App() {
   // const [activeLocations,setActiveLocations] = useState("")
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
 
+  console.log(pocket);
+
   if (locationSelectionState) {
     return (
       <div>
@@ -28,7 +30,9 @@ export default function App() {
     return (
       <div>
         <Fight
-          onClose={() => {
+          onClose={(newPocket) => {
+          //setPocket(newPocket);
+          console.log(newPocket)
             setFightState(false);
             setLocationSelectionState(true);
           }}

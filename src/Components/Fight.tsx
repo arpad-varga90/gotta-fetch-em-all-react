@@ -1,6 +1,8 @@
 import { gifUrl } from "../data/backgrounds";
 import PokemonMain from "./PokemonMain";
 import { getRandNumber } from "../data/utils";
+import Battle from "./Battle";
+import { useState } from "react";
 
 // 874 strong pokemon
 
@@ -13,10 +15,15 @@ export default function Fight({
   onClose,
 }: {
   activeLocationNumber: number;
-  onClose: () => void;
+  onClose: (newPocket: number[]) => void;
 }) {
+  const [enemyActualHP, setEnemyActualHP] = useState(0);
+  const [playerActualHP, setPlayerActualHP] = useState(0);
+  const [demageToEnemy, setDemageToEnemy] = useState(0);
+  const [demageToPlayer, setDemageToPlayer]=useState(0);
+
   return (
-    <div onClick={onClose} className="full-width-1024px">
+    <div className="full-width-1024px text-black">
       <img
         src={gifUrl[activeLocationNumber - 1]}
         alt="background"
@@ -26,6 +33,44 @@ export default function Fight({
         <div className="w-3/5 h-3/5 grid grid-cols-2 gap-5">
           <PokemonMain pokemonId={874} />
           <PokemonMain pokemonId={randNum()} />
+        </div>
+        <div>
+          <Battle
+            actualPocket={[1, 6]}
+            player={{
+              id: 61,
+              name: "name-of-player",
+              hp: 65,
+              defense: 65,
+              attack: 65,
+            }}
+            enemy={{
+              id: 134,
+              name: "name-of-enemy",
+              hp: 130,
+              defense: 65,
+              attack: 60,
+            }}
+            onClose={(newPocket) => {
+              onClose(newPocket);
+            }}
+            onHPChange={(
+              newEnemyHP,
+              newPlayerHP,
+              damageToEnemy,
+              damageToPlayer
+            ) => {
+              setEnemyActualHP(newEnemyHP);
+              setPlayerActualHP(newPlayerHP);
+              setDemageToEnemy(damageToEnemy);
+              setDemageToPlayer(damageToPlayer)
+            }}
+          />
+          <p>newPlayerHP: {Math.round(playerActualHP)}</p>
+          <p>newEnemyHP: {Math.round(enemyActualHP)}</p>
+          <p>demageToEnemy: {Math.round(demageToEnemy)}</p>
+          <p>demageToPlayer: {Math.round(demageToPlayer)}</p>
+          <p></p>
         </div>
       </div>
     </div>
