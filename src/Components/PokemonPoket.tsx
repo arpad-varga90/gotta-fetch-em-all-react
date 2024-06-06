@@ -7,7 +7,7 @@ async function fetchPokemon(n: number): Promise<PokemonDetails> {
   const data = await response.json();
   return data;
 }
-export default function PokemonPoket({id}:{id: number}) {
+export default function PokemonPoket({id, onSelect}:{id: number, onSelect:(id:number)=>void}) {
   const query = useQuery({
     queryKey: ["pocket", id],
     queryFn: () => fetchPokemon(id),
@@ -18,7 +18,7 @@ export default function PokemonPoket({id}:{id: number}) {
 
   return(
   <div>
-    <li className="w-12 h-12">
+    <li onClick={()=>{onSelect(id)}} className="w-12 h-12">
               <h3>{query.data?.name}</h3>
               <img
                 src={
