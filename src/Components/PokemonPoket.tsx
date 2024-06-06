@@ -8,7 +8,13 @@ async function fetchPokemon(n: number): Promise<PokemonDetails> {
   const data = await response.json();
   return data;
 }
-export default function PokemonPoket({ id }: { id: number }) {
+export default function PokemonPoket({
+  id,
+  onSelect,
+}: {
+  id: number;
+  onSelect: (id: number) => void;
+}) {
   const query = useQuery({
     queryKey: ["pocket", id],
     queryFn: () => fetchPokemon(id),
@@ -26,7 +32,14 @@ export default function PokemonPoket({ id }: { id: number }) {
   };
 
   return (
-    <div className="w-24 h-24" onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+    <div
+      className="w-24 h-24"
+      onMouseEnter={hoverOn}
+      onMouseLeave={hoverOff}
+      onClick={() => {
+        onSelect(id);
+      }}
+    >
       <p className={`text-base ${isVisible ? "visible" : "invisible"}`}>
         {query.data?.name}
       </p>
