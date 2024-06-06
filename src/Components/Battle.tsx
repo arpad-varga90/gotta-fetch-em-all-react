@@ -1,34 +1,25 @@
 import { useEffect, useState } from "react";
 import { getRandNumber } from "../data/utils";
+import { PokemonDetailsRefactored } from "../Types/types";
 
 export default function Battle({
   actualPocket,
-  enemyID,
-  enemyHP,
-  enemyDefense,
-  enemyAttack,
-  playerHP,
-  playerDefense,
-  playerAttack,
+  player,
+  enemy,
   onClose,
   onHPChange,
   onMessage,
 }: {
   actualPocket: number[];
-  enemyID: number;
-  enemyHP: number;
-  enemyDefense: number;
-  enemyAttack: number;
-  playerHP: number;
-  playerDefense: number;
-  playerAttack: number;
+  player: PokemonDetailsRefactored;
+  enemy: PokemonDetailsRefactored;
   onClose: (newPocket: number[]) => void;
   onHPChange: (newEnemyHP: number, newPlayerHP: number) => void;
   onMessage: (message: string) => void;
 }) {
-  const [enemyActualHP, setEnemyActualHP] = useState(enemyHP);
-  const [playerActualHP, setPlayerActualHP] = useState(playerHP);
-  const [newPocket, setNewPocket] = useState([1, 6]);
+  const [enemyActualHP, setEnemyActualHP] = useState(enemy.hp);
+  const [playerActualHP, setPlayerActualHP] = useState(player.hp);
+  const [newPocket, setNewPocket] = useState(actualPocket);
   const [attackState, setAttackState] = useState(1);
 
   function countPoints(attack: number, defense: number) {
@@ -42,16 +33,18 @@ export default function Battle({
   useEffect(() => {});
 
   function fight() {
-    const damageToEnemy = countPoints(playerAttack, enemyDefense);
-    const damageToPlayer = countPoints(enemyAttack, playerDefense);
+    const damageToEnemy = countPoints(player.attack, enemy.defense);
+    const damageToPlayer = countPoints(enemy.attack, player.defense);
     if (enemyActualHP - damageToEnemy <= 0) {
       setEnemyActualHP(0);
+      setNewPocket([...actualPocket,player.id,enemy.id])
       onMessage("You won");
       onHPChange(0, enemyActualHP);
       setAttackState(3);
     }
     if (playerActualHP - damageToPlayer <= 0) {
       setPlayerActualHP(0);
+      setNewPocket(actualPocket)
       onMessage("You loose");
       onHPChange(playerActualHP, 0);
       setAttackState(3);

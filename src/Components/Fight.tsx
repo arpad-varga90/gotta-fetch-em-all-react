@@ -30,13 +30,20 @@ export default function Fight({
       </div>
       <Battle
         actualPocket={[1, 6]}
-        enemyID={134}
-        enemyHP={130}
-        enemyDefense={65}
-        enemyAttack={60}
-        playerHP={65}
-        playerDefense={65}
-        playerAttack={65}
+        player={{
+          id: 61,
+          name: "name-of-player",
+          hp: 65,
+          defense: 65,
+          attack: 65,
+        }}
+        enemy={{
+          id: 134,
+          name: "name-of-enemy",
+          hp: 130,
+          defense: 65,
+          attack: 60,
+        }}
         onClose={(newPocket) => {
           onClose(newPocket);
         }

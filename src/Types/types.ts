@@ -17,3 +17,12 @@ export type PokemonDetails = {
     };
   };
 };
+
+export type PokemonDetailsRefactored = 
+{
+  id: number;
+  name: string;
+  hp: number;
+  defense: number;
+  attack: number;
+}
