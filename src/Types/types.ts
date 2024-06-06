@@ -8,6 +8,12 @@ export type PokemonDetails = {
   id: number;
   name: string;
   stats: Array<{
-    [key: number]: { base_stat: number; stat: { name: string } };
+    base_stat: number;
+    stat: { name: string };
   }>;
+  sprites: {
+    other: {
+      showdown: { front_default: string };
+    };
+  };
 };
