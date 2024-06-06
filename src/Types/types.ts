@@ -14,6 +14,7 @@ export type PokemonDetails = {
       dream_world: {
         front_default: string;
       };
+      showdown: { front_default: string };
     };
   };
 };
