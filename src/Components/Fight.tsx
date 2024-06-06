@@ -33,8 +33,8 @@ export default function Fight({
         <div className="w-3/5 h-3/5 grid grid-cols-2 gap-5">
           <PokemonMain pokemonId={874} />
           <PokemonMain pokemonId={randNum()} />
-        </div>
-        <div>
+        
+        <div className="card justify-between bg-slate-50/75">
           <Battle
             actualPocket={[1, 6]}
             player={{
@@ -66,11 +66,8 @@ export default function Fight({
               setDemageToPlayer(damageToPlayer)
             }}
           />
-          <p>newPlayerHP: {Math.round(playerActualHP)}</p>
-          <p>newEnemyHP: {Math.round(enemyActualHP)}</p>
-          <p>demageToEnemy: {Math.round(demageToEnemy)}</p>
-          <p>demageToPlayer: {Math.round(demageToPlayer)}</p>
           <p></p>
+        </div>
         </div>
       </div>
     </div>

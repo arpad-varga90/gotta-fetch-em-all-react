@@ -62,11 +62,11 @@ export default function Battle({
   }
 
   return (
-    <div>
+    <div >
       <h1>BATTLE</h1>
       {attackState === 1 ? (
         <>
-          <button
+          <button className="btn btn-outline btn-primary"
             onClick={() => {
               setAttackState(2);
             }}
@@ -76,7 +76,7 @@ export default function Battle({
         </>
       ) : attackState === 2 ? (
         <>
-          <button
+          <button className="btn btn-outline btn-error"
             onClick={() => {
               fight();
             }}
@@ -86,7 +86,7 @@ export default function Battle({
         </>
       ) : (
         <>
-          <button
+          <button className="btn btn-outline btn-accent"
             onClick={() => {
               onClose(newPocket);
             }}
