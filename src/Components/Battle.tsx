@@ -27,13 +27,11 @@ export default function Battle({
 
   function countPoints(attack: number, defense: number) {
     return (
-      ((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) *
+      Math.round(((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) *
         getRandNumber(217, 255)) /
       255
-    );
+    ));
   }
-
-  useEffect(() => {});
 
   function fight() {
     const damageToEnemy = countPoints(player.attack, enemy.defense);
