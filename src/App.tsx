@@ -14,7 +14,8 @@ export default function App() {
 
   if (locationSelectionState) {
     return (
-      <div>
+      <div className="full-width-1024px">
+        <Pocket pocket={pocket} onSelect={() => {}} />
         <Map
           onSelectLocation={(n, name) => {
             setActiveLocationNumber(n);
@@ -23,25 +24,12 @@ export default function App() {
             setFightState(true);
           }}
         />
-        <Pocket pocket={pocket} onSelect={() => {}} />
       </div>
     );
   }
   if (fightState) {
     return (
-      <div>
-        <Fight
-          onClose={(newPocket) => {
-            setPocket([...newPocket]);
-            setFightState(false);
-            setLocationSelectionState(true);
-            setPokemonSelectionState(true);
-          }}
-          selectedPokemonId={selectedPokemonId}
-          activeLocationNumber={activeLocationNumber}
-          activeLocationName={activeLocations}
-          pocket={pocket}
-        />
+      <div >
         <Pocket
           pocket={pocket}
           onSelect={(id) => {
@@ -55,6 +43,18 @@ export default function App() {
               ]);
             }
           }}
+        />
+        <Fight
+          onClose={(newPocket) => {
+            setPocket([...newPocket]);
+            setFightState(false);
+            setLocationSelectionState(true);
+            setPokemonSelectionState(true);
+          }}
+          selectedPokemonId={selectedPokemonId}
+          activeLocationNumber={activeLocationNumber}
+          activeLocationName={activeLocations}
+          pocket={pocket}
         />
       </div>
     );

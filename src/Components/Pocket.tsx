@@ -8,7 +8,7 @@ export default function Pocket({
   onSelect: (id: number) => void;
 }) {
   return (
-    <footer>
+    <div className = {"full-width-1024px card justify-between bg-slate-50/75 p-5 text-black m-auto mt-5 mb-5"}>
       <h2>POCKET:</h2>
       <div className="flex flex-row">
         {pocket.map((id) => (
@@ -21,6 +21,6 @@ export default function Pocket({
           />
         ))}
       </div>
-    </footer>
+    </div>
   );
 }

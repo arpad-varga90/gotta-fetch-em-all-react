@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRandNumber } from "../data/utils";
 import { PokemonDetailsRefactored } from "../Types/types";
 
@@ -8,6 +8,7 @@ export default function Battle({
   enemy,
   onClose,
   onHPChange,
+  onSetMessage
 }: {
   actualPocket: number[];
   player: PokemonDetailsRefactored;
@@ -19,6 +20,7 @@ export default function Battle({
     damageToEnemy: number,
     damageToPlayer: number
   ) => void;
+  onSetMessage: (message:string)=>void
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(enemy.hp);
   const [playerActualHP, setPlayerActualHP] = useState(player.hp);
@@ -61,12 +63,12 @@ export default function Battle({
 
   return (
     <div className="card justify-between bg-slate-50/75 p-5">
-      <h1>BATTLE</h1>
       {attackState === 1 ? (
         <>
           <button className="btn btn-outline btn-primary"
             onClick={() => {
-              setAttackState(2);
+              setAttackState(2)
+              onSetMessage("START THE FIGHT, HIT ATTACK");
             }}
           >
             START FIGHT

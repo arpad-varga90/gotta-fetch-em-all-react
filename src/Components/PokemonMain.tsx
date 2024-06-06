@@ -15,7 +15,7 @@ export default function PokemonMain({
       {/* Name */}
       <h1 className="poke-details-header">{pokemonById.name.toUpperCase()}</h1>
       {/* Image */}
-      <div className="bg-blue-100 rounded-lg h-60 p-2 mx-4">
+      <div className="bg-blue-100 rounded-lg h-40 p-2 mx-4">
         {pokemonById.sprites.other.dream_world.front_default ? (
           <img
             src={pokemonById.sprites.other.dream_world.front_default}

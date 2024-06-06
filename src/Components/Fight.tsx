@@ -21,6 +21,7 @@ export default function Fight({
   const [playerActualHP, setPlayerActualHP] = useState(-10);
   const [demageToPlayer, setDemageToPlayer] = useState(0);
   const [demageToEnemy, setDemageToEnemy] = useState(0);
+  const [message, setMessage] = useState("Choose your champion");
 
   const randomNumber = useRef(getRandNumber(1, 1025));
   const enemyData = usePokemon(randomNumber.current);
@@ -29,7 +30,7 @@ export default function Fight({
   return (
     <div className="full-width-1024px text-black">
       {/* Actual city name, bg image */}
-      <h1>{activeLocationName}</h1>
+
       <img
         src={gifUrl[activeLocationNumber - 1]}
         alt="background"
@@ -37,8 +38,14 @@ export default function Fight({
       />
 
       <div className="overlay-components">
-        <div className="w-3/5 grid grid-cols-1 gap-5">
-          <div className="grid grid-cols-2 gap-5">
+        <div className="w-3/5 grid grid-cols-1 gap-3">
+          <h1 className="grid grid-cols-1 card  justify-between text-center text-xl bg-slate-50/75 p-2">
+            {activeLocationName.toLocaleUpperCase()}
+          </h1>
+          <p className="grid grid-cols-1 card justify-between text-center text-sm bg-slate-50/75 p-2">
+            {message}
+          </p>
+          <div className="grid grid-cols-2 gap-3">
             {/* Player data load */}
             {playerData.error && (
               <h1 className="warning-message">Something went wrong...</h1>
@@ -91,7 +98,22 @@ export default function Fight({
                   setPlayerActualHP(newPlayerHP);
                   setDemageToEnemy(damageToEnemy);
                   setDemageToPlayer(damageToPlayer);
+                  if (newEnemyHP <= 0) {
+                    setMessage(
+                      `${playerData.data.name.toLocaleUpperCase()} 🌟WON🌟 Collect ${enemyData.data.name.toLocaleUpperCase()} `
+                    );
+                  }
+                  if (newPlayerHP <= 0) {
+                    setMessage(
+                      `You lost ${playerData.data.name.toLocaleUpperCase()} 🪦RIP🪦`
+                    );
+                  } else {
+                    setMessage(
+                      `${playerData.data.name}: -${damageToPlayer}, ${enemyData.data.name}: -${damageToEnemy}`
+                    );
+                  }
                 }}
+                onSetMessage={(message)=>{setMessage(message)}}
               />
             )}
           </div>

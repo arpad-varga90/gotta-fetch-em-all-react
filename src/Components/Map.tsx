@@ -7,7 +7,7 @@ export default function Map({
   onSelectLocation: (n: number,name:string) => void;
 }) {
   return (
-    <div className="relative ">
+    <div className="relative  ">
       <img src={imgUrl} alt="PokeMap" className="size-full" />
       {[...Array(20).keys()].map((i) => {
         return (
