@@ -26,15 +26,15 @@ export default function PokemonPoket({ id }: { id: number }) {
   };
 
   return (
-    <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
-      <h3 className={`${isVisible ? "visible" : "invisible"}`}>
+    <div className="w-24 h-24" onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+      <p className={`text-base ${isVisible ? "visible" : "invisible"}`}>
         {query.data?.name}
-      </h3>
+      </p>
 
-      <li className="w-12 h-12">
+      <div>
         <img
           id="pokemonImg"
-          className="w-12 h-12"
+          className="w-20 h-20"
           src={
             query.data?.sprites.other.showdown.front_default
               ? query.data?.sprites.other.showdown.front_default
@@ -44,7 +44,7 @@ export default function PokemonPoket({ id }: { id: number }) {
           }
           alt={query.data?.name}
         />
-      </li>
+      </div>
     </div>
   );
 }

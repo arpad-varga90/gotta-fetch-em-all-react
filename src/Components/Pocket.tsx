@@ -10,7 +10,7 @@ export default function Pocket({
   return (
     <footer>
       <h2>POCKET:</h2>
-      <ul>
+      <div className="flex flex-row">
         {pocket.map((id) => (
           <PokemonPoket
             key={id}
@@ -20,7 +20,7 @@ export default function Pocket({
             }}
           />
         ))}
-      </ul>
+      </div>
     </footer>
   );
 }
