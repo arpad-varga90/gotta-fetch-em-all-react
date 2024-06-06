@@ -24,11 +24,10 @@ export default function PokemonPocket({
       {isLoading && <h1 className="load-info">Loading...</h1>}
       {isSuccess && (
         <>
-          <p className={`m-3 text-base ${isVisible ? "visible" : "invisible"}`}>
+          <p className={`m-2 text-base ${isVisible ? "visible" : "invisible"}`}>
             {data.name}
           </p>
-
-          <div className="card bg-blue-100 w-full h-full p-3 cursor-poke-full">
+          <div className="card w-full h-1/2 p-2 cursor-poke-full">
             <img
               className="w-auto h-full"
               src={

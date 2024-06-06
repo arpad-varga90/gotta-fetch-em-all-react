@@ -19,8 +19,6 @@ export default function Fight({
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(-10);
   const [playerActualHP, setPlayerActualHP] = useState(-10);
-  const [demageToPlayer, setDemageToPlayer] = useState(0);
-  const [demageToEnemy, setDemageToEnemy] = useState(0);
   const [message, setMessage] = useState("Choose your champion");
 
   const randomNumber = useRef(getRandNumber(1, 1025));
@@ -96,8 +94,7 @@ export default function Fight({
                 ) => {
                   setEnemyActualHP(newEnemyHP);
                   setPlayerActualHP(newPlayerHP);
-                  setDemageToEnemy(damageToEnemy);
-                  setDemageToPlayer(damageToPlayer);
+
                   if (newEnemyHP <= 0) {
                     setMessage(
                       `${playerData.data.name.toLocaleUpperCase()} 🌟WON🌟 Collect ${enemyData.data.name.toLocaleUpperCase()} `
@@ -113,7 +110,9 @@ export default function Fight({
                     );
                   }
                 }}
-                onSetMessage={(message)=>{setMessage(message)}}
+                onSetMessage={(message) => {
+                  setMessage(message);
+                }}
               />
             )}
           </div>

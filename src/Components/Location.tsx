@@ -14,12 +14,12 @@ export default function Location({
   onSelectLocation,
 }: {
   locationNumber: number;
-  onSelectLocation: (locationName:string) => void;
+  onSelectLocation: (locationName: string) => void;
 }) {
   const query = useQuery({
     queryKey: ["location", locationNumber],
     queryFn: () => fetchLocation(locationNumber),
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
   const [pointer, setPointer] = useState(mapPins[locationNumber - 1]);
   const [locationCard, setLocationCard] = useState(<></>);
@@ -30,7 +30,7 @@ export default function Location({
   const hoverOn = function () {
     setLocationCard(
       <span
-        onClick={()=>onSelectLocation(query.data?.names[1].name as string)}
+        onClick={() => onSelectLocation(query.data?.names[1].name as string)}
         className="text-white	text-2xl bg-red-700 p-2 z-10 cursor-poke-full"
       >
         {query.data?.names[1].name}

@@ -8,7 +8,7 @@ export default function Battle({
   enemy,
   onClose,
   onHPChange,
-  onSetMessage
+  onSetMessage,
 }: {
   actualPocket: number[];
   player: PokemonDetailsRefactored;
@@ -20,7 +20,7 @@ export default function Battle({
     damageToEnemy: number,
     damageToPlayer: number
   ) => void;
-  onSetMessage: (message:string)=>void
+  onSetMessage: (message: string) => void;
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(enemy.hp);
   const [playerActualHP, setPlayerActualHP] = useState(player.hp);
@@ -28,11 +28,11 @@ export default function Battle({
   const [attackState, setAttackState] = useState(1);
 
   function countPoints(attack: number, defense: number) {
-    return (
-      Math.round(((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) *
+    return Math.round(
+      ((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) *
         getRandNumber(217, 255)) /
-      255
-    ));
+        255
+    );
   }
 
   function fight() {
@@ -65,9 +65,10 @@ export default function Battle({
     <div className="card justify-between bg-slate-50/75 p-5">
       {attackState === 1 ? (
         <>
-          <button className="btn btn-outline btn-primary cursor-poke-full"
+          <button
+            className="btn btn-outline btn-primary cursor-poke-full"
             onClick={() => {
-              setAttackState(2)
+              setAttackState(2);
               onSetMessage("START THE FIGHT, HIT ATTACK");
             }}
           >
@@ -76,7 +77,8 @@ export default function Battle({
         </>
       ) : attackState === 2 ? (
         <>
-          <button className="btn btn-outline btn-error cursor-poke-full"
+          <button
+            className="btn btn-outline btn-error cursor-poke-full"
             onClick={() => {
               fight();
             }}
@@ -86,7 +88,8 @@ export default function Battle({
         </>
       ) : (
         <>
-          <button className="btn btn-outline btn-accent cursor-poke-full"
+          <button
+            className="btn btn-outline btn-accent cursor-poke-full"
             onClick={() => {
               onClose(newPocket);
             }}
