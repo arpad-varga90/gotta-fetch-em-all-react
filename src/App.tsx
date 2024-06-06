@@ -31,7 +31,7 @@ export default function App() {
       <div>
         <Fight
           onClose={(newPocket) => {
-          //setPocket(newPocket);
+          setPocket([...newPocket]);
           console.log(newPocket)
             setFightState(false);
             setLocationSelectionState(true);
