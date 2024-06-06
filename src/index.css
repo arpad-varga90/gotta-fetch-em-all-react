@@ -32,4 +32,8 @@
   .overlay-components {
     @apply absolute inset-0 flex items-center justify-center;
   }
+
+  .custom-pointer {
+    cursor: url('./assets/mousePointer/icon-empty.png');
+  }
 }

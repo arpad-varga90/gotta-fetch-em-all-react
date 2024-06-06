@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRandNumber } from "../data/utils";
 import { PokemonDetailsRefactored } from "../Types/types";
 
@@ -64,7 +64,7 @@ export default function Battle({
       <h1>BATTLE</h1>
       {attackState === 1 ? (
         <>
-          <button className="btn btn-outline btn-primary"
+          <button className="btn btn-outline btn-primary cursor-poke-full"
             onClick={() => {
               setAttackState(2);
             }}
@@ -74,7 +74,7 @@ export default function Battle({
         </>
       ) : attackState === 2 ? (
         <>
-          <button className="btn btn-outline btn-error"
+          <button className="btn btn-outline btn-error cursor-poke-full"
             onClick={() => {
               fight();
             }}
@@ -84,7 +84,7 @@ export default function Battle({
         </>
       ) : (
         <>
-          <button className="btn btn-outline btn-accent"
+          <button className="btn btn-outline btn-accent cursor-poke-full"
             onClick={() => {
               onClose(newPocket);
             }}
