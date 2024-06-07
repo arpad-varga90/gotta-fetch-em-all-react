@@ -100,7 +100,7 @@ export default function Fight({
                       `${playerData.data.name.toLocaleUpperCase()} 🌟WON🌟 Collect ${enemyData.data.name.toLocaleUpperCase()} `
                     );
                   }
-                  if (newPlayerHP <= 0) {
+                  else if (newPlayerHP <= 0) {
                     setMessage(
                       `You lost ${playerData.data.name.toLocaleUpperCase()} 🪦RIP🪦`
                     );

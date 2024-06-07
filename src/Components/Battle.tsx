@@ -41,13 +41,13 @@ export default function Battle({
     if (enemyActualHP - damageToEnemy <= 0) {
       setEnemyActualHP(0);
       setNewPocket([...actualPocket, player.id, enemy.id]);
-      onHPChange(0, enemyActualHP, damageToEnemy, damageToPlayer);
+      onHPChange(0, playerActualHP, damageToEnemy, damageToPlayer);
       setAttackState(3);
     }
     if (playerActualHP - damageToPlayer <= 0) {
       setPlayerActualHP(0);
       setNewPocket(actualPocket);
-      onHPChange(playerActualHP, 0, damageToEnemy, damageToPlayer);
+      onHPChange(enemyActualHP, 0, damageToEnemy, damageToPlayer);
       setAttackState(3);
     } else {
       setEnemyActualHP(enemyActualHP - damageToEnemy);
