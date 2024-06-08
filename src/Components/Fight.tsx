@@ -45,30 +45,36 @@ export default function Fight({
           </p>
           <div className="grid grid-cols-2 gap-3">
             {/* Player data load */}
-            {playerData.error && (
-              <h1 className="warning-message">Something went wrong...</h1>
-            )}
-            {playerData.isLoading && <h1 className="load-info">Loading...</h1>}
-            {playerData.isSuccess && (
+            {selectedPokemonId === 0 ? (
+              <h1 className=" text-center load-info">Choose your champion</h1>
+            ) : playerData.error ? (
+              <h1 className="text-center warning-message">
+                Something went wrong...
+              </h1>
+            ) : enemyData.isLoading ? (
+              <h1 className="text-center load-info">Loading...</h1>
+            ) : (
               <PokemonMain
                 pokemonById={playerData.data}
                 newHP={playerActualHP}
               />
             )}
-            {/* Enemy data load */}
-            {enemyData.error && (
-              <h1 className="warning-message">Something went wrong...</h1>
-            )}
 
-            {enemyData.isLoading && <h1 className="load-info">Loading...</h1>}
-            {enemyData.isSuccess && (
+            {/* Enemy data load */}
+            {enemyData.error ? (
+              <h1 className="text-center warning-message">
+                Something went wrong...
+              </h1>
+            ) : enemyData.isLoading ? (
+              <h1 className="text-center load-info">Loading...</h1>
+            ) : (
               <PokemonMain pokemonById={enemyData.data} newHP={enemyActualHP} />
             )}
           </div>
 
           {/* Battle component */}
           <div className="grid grid-cols-1">
-            {enemyData.isSuccess && playerData.isSuccess && (
+            {enemyData.isSuccess && playerData.isSuccess ? (
               <Battle
                 actualPocket={pocket}
                 player={{
@@ -99,8 +105,7 @@ export default function Fight({
                     setMessage(
                       `${playerData.data.name.toLocaleUpperCase()} 🌟WON🌟 Collect ${enemyData.data.name.toLocaleUpperCase()} `
                     );
-                  }
-                  else if (newPlayerHP <= 0) {
+                  } else if (newPlayerHP <= 0) {
                     setMessage(
                       `You lost ${playerData.data.name.toLocaleUpperCase()} 🪦RIP🪦`
                     );
@@ -114,6 +119,8 @@ export default function Fight({
                   setMessage(message);
                 }}
               />
+            ) : (
+              <div className="card justify-between h-30 bg-slate-50/75 p-5"></div>
             )}
           </div>
         </div>
