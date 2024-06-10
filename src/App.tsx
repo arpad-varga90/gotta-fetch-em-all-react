@@ -5,23 +5,21 @@ import Pocket from "./Components/Pocket";
 
 export default function App() {
   const [locationSelectionState, setLocationSelectionState] = useState(true);
-  const [fightState, setFightState] = useState(false);
-  const [pocket, setPocket] = useState([1, 6, 61, 644]);
-  const [pokemonSelectionState, setPokemonSelectionState] = useState(true);
+  const [fightState, setFightState] = useState("stop");
+  const [pocket, setPocket] = useState([1, 6, 30]);
   const [selectedPokemonId, setSelectedPokemonId] = useState(0);
   const [activeLocations, setActiveLocations] = useState("");
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
-
   if (locationSelectionState) {
     return (
       <div className="full-width-1024px">
-        <Pocket pocket={pocket} onSelect={() => {}} />
+        <Pocket pocket={pocket} fightState={fightState} onSelect={() => {}} />
         <Map
           onSelectLocation={(n, name) => {
             setActiveLocationNumber(n);
             setActiveLocations(name);
             setLocationSelectionState(false);
-            setFightState(true);
+            setFightState("select");
           }}
         />
       </div>
@@ -29,17 +27,24 @@ export default function App() {
   }
   if (fightState) {
     return (
-      <div >
+      <div>
         <Pocket
           pocket={pocket}
+          fightState={fightState}
           onSelect={(id) => {
-            setPokemonSelectionState(false);
             setSelectedPokemonId(id);
-            if (pokemonSelectionState) {
+            if (fightState === "select" && selectedPokemonId === 0) {
               setPocket([
                 ...pocket.filter((item) => {
                   return item !== id;
                 }),
+              ]);
+            } else if (fightState === "select" && selectedPokemonId !== 0) {
+              setPocket([
+                ...pocket.filter((item) => {
+                  return item !== id;
+                }),
+                selectedPokemonId,
               ]);
             }
           }}
@@ -47,14 +52,18 @@ export default function App() {
         <Fight
           onClose={(newPocket) => {
             setPocket([...newPocket]);
-            setFightState(false);
+            setFightState("stop");
             setLocationSelectionState(true);
-            setPokemonSelectionState(true);
+            setSelectedPokemonId(0);
           }}
           selectedPokemonId={selectedPokemonId}
           activeLocationNumber={activeLocationNumber}
           activeLocationName={activeLocations}
           pocket={pocket}
+          fightState={fightState}
+          onFightState={(fightState) => {
+            setFightState(fightState);
+          }}
         />
       </div>
     );

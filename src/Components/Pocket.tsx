@@ -2,9 +2,11 @@ import PokemonPocket from "./PokemonPocket";
 
 export default function Pocket({
   pocket,
+  fightState,
   onSelect,
 }: {
   pocket: number[];
+  fightState: string;
   onSelect: (id: number) => void;
 }) {
   return (
@@ -15,6 +17,7 @@ export default function Pocket({
           <PokemonPocket
             key={id}
             id={id}
+            fightState={fightState}
             onSelect={(id) => {
               onSelect(id);
             }}

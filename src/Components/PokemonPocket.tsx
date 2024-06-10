@@ -3,9 +3,11 @@ import { usePokemon } from "../data/utils";
 
 export default function PokemonPocket({
   id,
+  fightState,
   onSelect,
 }: {
   id: number;
+  fightState: string;
   onSelect: (id: number) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +19,9 @@ export default function PokemonPocket({
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
       onClick={() => {
-        onSelect(id);
+        if (fightState === "select") {
+          onSelect(id);
+        }
       }}
     >
       {error && <h1 className="warning-message">Something went wrong...</h1>}

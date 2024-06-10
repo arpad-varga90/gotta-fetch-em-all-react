@@ -6,13 +6,16 @@ export default function Battle({
   actualPocket,
   player,
   enemy,
+  fightState,
   onClose,
   onHPChange,
-  onSetMessage,
+  onMessage: onMessage,
+  onFightState,
 }: {
   actualPocket: number[];
   player: PokemonDetailsRefactored;
   enemy: PokemonDetailsRefactored;
+  fightState: string;
   onClose: (newPocket: number[]) => void;
   onHPChange: (
     newEnemyHP: number,
@@ -20,12 +23,12 @@ export default function Battle({
     damageToEnemy: number,
     damageToPlayer: number
   ) => void;
-  onSetMessage: (message: string) => void;
+  onMessage: (message: string) => void;
+  onFightState: (fightState: string) => void;
 }) {
   const [enemyActualHP, setEnemyActualHP] = useState(enemy.hp);
   const [playerActualHP, setPlayerActualHP] = useState(player.hp);
   const [newPocket, setNewPocket] = useState(actualPocket);
-  const [attackState, setAttackState] = useState(1);
 
   function countPoints(attack: number, defense: number) {
     return Math.round(
@@ -42,13 +45,13 @@ export default function Battle({
       setEnemyActualHP(0);
       setNewPocket([...actualPocket, player.id, enemy.id]);
       onHPChange(0, playerActualHP, damageToEnemy, damageToPlayer);
-      setAttackState(3);
+      onFightState("result");
     }
     if (playerActualHP - damageToPlayer <= 0) {
       setPlayerActualHP(0);
       setNewPocket(actualPocket);
       onHPChange(enemyActualHP, 0, damageToEnemy, damageToPlayer);
-      setAttackState(3);
+      onFightState("result");
     } else {
       setEnemyActualHP(enemyActualHP - damageToEnemy);
       setPlayerActualHP(playerActualHP - damageToPlayer);
@@ -60,22 +63,33 @@ export default function Battle({
       );
     }
   }
-
   return (
     <div className="card justify-between h-30 bg-slate-50/75 p-5">
-      {attackState === 1 ? (
+      {fightState === "select" ? (
         <>
-          <button
+        <div className={"grid grid-cols-2"}>
+        <button
             className="btn btn-outline btn-primary cursor-poke-full"
             onClick={() => {
-              setAttackState(2);
-              onSetMessage("START THE FIGHT, HIT ATTACK");
+              onFightState("fight");
+              onMessage("HIT ATTACK");
             }}
           >
             START FIGHT
           </button>
+          <button
+                  className="btn btn-outline btn-primary cursor-poke-full"
+                  onClick={() => {
+                    onClose([...actualPocket,player.id]);
+                    onMessage("Choose a fighter or run");
+                  }}
+                >
+                  RUN AWAY
+                </button>
+        </div>
+         
         </>
-      ) : attackState === 2 ? (
+      ) : fightState === "fight" ? (
         <>
           <button
             className="btn btn-outline btn-error cursor-poke-full"
@@ -92,6 +106,7 @@ export default function Battle({
             className="btn btn-outline btn-accent cursor-poke-full"
             onClick={() => {
               onClose(newPocket);
+              onFightState("stop");
             }}
           >
             BACK TO MAP
