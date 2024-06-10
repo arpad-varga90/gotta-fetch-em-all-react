@@ -7,7 +7,7 @@ export default function App() {
   const [gameState, setGameState] = useState("start");
   const [locationSelectionState, setLocationSelectionState] = useState(true);
   const [fightState, setFightState] = useState("stop");
-  const [pocket, setPocket] = useState([1, 6, 30]);
+  const [pocket, setPocket] = useState([61]);
   const [selectedPokemonId, setSelectedPokemonId] = useState(0);
   const [activeLocations, setActiveLocations] = useState("");
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
@@ -18,7 +18,7 @@ export default function App() {
         {gameState === "start" && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 text-white text-center text-3xl font-bold cursor-poke-full">
             <button
-              className="transition-transform transform hover:scale-110"
+              className="cursor-poke-full transition-transform transform hover:scale-110 "
               onClick={() => {
                 setGameState("on");
               }}
@@ -32,7 +32,9 @@ export default function App() {
             <div className="grid grid-rows-2">
               <h1 className="text-3xl font-bold">GAME OVER</h1>
               <button
-                className={"transition-transform transform hover:scale-110"}
+                className={
+                  "cursor-poke-full transition-transform transform hover:scale-110"
+                }
                 onClick={() => {
                   setGameState("on");
                 }}
