@@ -132,7 +132,7 @@ export default function Fight({
             ) : (
               <div className="card justify-between h-30 bg-slate-50/75 p-5">
                 <button
-                  className="btn btn-outline btn-primary cursor-poke-full"
+                  className="btn btn-outline btn-accent cursor-poke-full"
                   onClick={() => {
                     onClose(pocket);
                     setMessage("Choose a fighter or run");

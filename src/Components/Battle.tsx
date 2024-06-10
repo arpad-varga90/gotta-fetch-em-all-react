@@ -67,27 +67,26 @@ export default function Battle({
     <div className="card justify-between h-30 bg-slate-50/75 p-5">
       {fightState === "select" ? (
         <>
-        <div className={"grid grid-cols-2"}>
-        <button
-            className="btn btn-outline btn-primary cursor-poke-full"
-            onClick={() => {
-              onFightState("fight");
-              onMessage("HIT ATTACK");
-            }}
-          >
-            START FIGHT
-          </button>
-          <button
-                  className="btn btn-outline btn-primary cursor-poke-full"
-                  onClick={() => {
-                    onClose([...actualPocket,player.id]);
-                    onMessage("Choose a fighter or run");
-                  }}
-                >
-                  RUN AWAY
-                </button>
-        </div>
-         
+          <div className={"grid grid-cols-2 gap-4"}>
+            <button
+              className="btn btn-outline btn-primary cursor-poke-full"
+              onClick={() => {
+                onFightState("fight");
+                onMessage("HIT ATTACK");
+              }}
+            >
+              START FIGHT
+            </button>
+            <button
+              className="btn btn-outline btn-accent cursor-poke-full"
+              onClick={() => {
+                onClose([...actualPocket, player.id]);
+                onMessage("Choose a fighter or run");
+              }}
+            >
+              RUN AWAY
+            </button>
+          </div>
         </>
       ) : fightState === "fight" ? (
         <>
@@ -103,7 +102,7 @@ export default function Battle({
       ) : (
         <>
           <button
-            className="btn btn-outline btn-accent cursor-poke-full"
+            className="btn btn-outline btn-info cursor-poke-full"
             onClick={() => {
               onClose(newPocket);
               onFightState("stop");
