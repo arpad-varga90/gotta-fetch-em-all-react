@@ -62,7 +62,9 @@ export default function Fight({
                 newHP={playerActualHP}
                 fightState={""}
               />
-            ):<></>}
+            ) : (
+              <></>
+            )}
 
             {/* Enemy data load */}
             {enemyData.error ? (
@@ -71,9 +73,15 @@ export default function Fight({
               </h1>
             ) : enemyData.isLoading ? (
               <h1 className="text-center load-info">Loading...</h1>
-            ) : enemyData.isSuccess? (
-              <PokemonMain pokemonById={enemyData.data} newHP={enemyActualHP} fightState={fightState}/>
-            ):<></>}
+            ) : enemyData.isSuccess ? (
+              <PokemonMain
+                pokemonById={enemyData.data}
+                newHP={enemyActualHP}
+                fightState={fightState}
+              />
+            ) : (
+              <></>
+            )}
           </div>
 
           {/* Battle component */}
@@ -83,14 +91,14 @@ export default function Fight({
                 actualPocket={pocket}
                 player={{
                   id: playerData.data.id,
-                  name:playerData.data.name,
+                  name: playerData.data.name,
                   hp: playerData.data.stats[0].base_stat,
                   attack: playerData.data.stats[1].base_stat,
                   defense: playerData.data.stats[2].base_stat,
                 }}
                 enemy={{
                   id: enemyData.data.id,
-                  name:enemyData.data.name,
+                  name: enemyData.data.name,
                   hp: enemyData.data.stats[0].base_stat,
                   attack: enemyData.data.stats[1].base_stat,
                   defense: enemyData.data.stats[2].base_stat,

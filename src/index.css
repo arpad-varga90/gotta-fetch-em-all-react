@@ -34,6 +34,6 @@
   }
 
   .custom-pointer {
-    cursor: url('./assets/mousePointer/icon-empty.png');
+    cursor: url("./assets/mousePointer/icon-empty.png");
   }
 }
