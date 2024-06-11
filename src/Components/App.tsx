@@ -1,6 +1,6 @@
 import Map from "./Map";
 import Fight from "./Fight";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pocket from "./Pocket";
 
 export default function App() {
@@ -12,9 +12,21 @@ export default function App() {
   const [activeLocations, setActiveLocations] = useState("");
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
 
+  const [height, setHeight] = useState(window.innerHeight);
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(window.innerHeight);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   if (locationSelectionState) {
     return (
-      <div className="full-width-1024px">
+      <div className="relative max-h-screen m-auto" style={{"max-width": height*2520/2170}}>
         {gameState === "start" && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 text-white text-center text-3xl font-bold cursor-poke-full">
             <button
@@ -45,7 +57,7 @@ export default function App() {
           </div>
         )}
         <>
-          <Pocket pocket={pocket} fightState={fightState} onSelect={() => {}} />
+          {/*<Pocket pocket={pocket} fightState={fightState} onSelect={() => {}} />*/}
           <Map
             onSelectLocation={(n, name) => {
               setActiveLocationNumber(n);
