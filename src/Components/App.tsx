@@ -1,7 +1,7 @@
-import Map from "./Components/Map";
-import Fight from "./Components/Fight";
+import Map from "./Map";
+import Fight from "./Fight";
 import { useState } from "react";
-import Pocket from "./Components/Pocket";
+import Pocket from "./Pocket";
 
 export default function App() {
   const [gameState, setGameState] = useState("start");
