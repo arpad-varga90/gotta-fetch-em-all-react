@@ -7,7 +7,7 @@ export default function App() {
   const [gameState, setGameState] = useState("start");
   const [locationSelectionState, setLocationSelectionState] = useState(true);
   const [fightState, setFightState] = useState("stop");
-  const [pocket, setPocket] = useState([61]);
+  const [pocket, setPocket] = useState([2,6,7]);
   const [selectedPokemonId, setSelectedPokemonId] = useState(0);
   const [activeLocations, setActiveLocations] = useState("");
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
