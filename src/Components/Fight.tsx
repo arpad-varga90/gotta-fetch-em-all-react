@@ -28,14 +28,13 @@ export default function Fight({
   const enemyData = usePokemon(randomNumber.current);
   const playerData = usePokemon(selectedPokemonId);
 
-  return (
-    <div className="full-width-1024px text-black">
-      {/* Actual city name, bg image */}
 
+  return (
+    <div className="text-black relative top-20  ">
       <img
         src={gifUrl[activeLocationNumber - 1]}
         alt="background"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover "
       />
 
       <div className="overlay-components">

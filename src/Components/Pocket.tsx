@@ -10,8 +10,7 @@ export default function Pocket({
   onSelect: (id: number) => void;
 }) {
   return (
-    <div className="full-width-1024px h-40 card justify-between bg-slate-50/75 p-5 text-black m-auto mt-5 mb-5">
-      <h2>POCKET:</h2>
+    <div className=" absolute top-0 left-0 z-10 text-black">
       <div className="flex flex-row">
         {pocket.map((id) => (
           <PokemonPocket

@@ -2,6 +2,8 @@ import Map from "./Map";
 import Fight from "./Fight";
 import { useEffect, useState } from "react";
 import Pocket from "./Pocket";
+import Vibrant from "node-vibrant";
+import { gifUrl } from "../Data/backgrounds";
 
 export default function App() {
   const [gameState, setGameState] = useState("start");
@@ -11,6 +13,20 @@ export default function App() {
   const [selectedPokemonId, setSelectedPokemonId] = useState(0);
   const [activeLocations, setActiveLocations] = useState("");
   const [activeLocationNumber, setActiveLocationNumber] = useState(0);
+
+  const [backgroundColor, setBackgroundColor] = useState('white'); // Default background color
+
+  useEffect(() => {
+    const vibrant = new Vibrant(gifUrl[activeLocationNumber - 1]);
+
+    vibrant.getPalette().then(palette => {
+      const { Vibrant, LightVibrant, DarkVibrant } = palette;
+      const mainColor = Vibrant || LightVibrant || DarkVibrant;
+      setBackgroundColor(mainColor.hex || 'white'); // Set background color
+    });
+    console.log(gifUrl[activeLocationNumber - 1])
+  }, [activeLocationNumber]);
+
 
   const [height, setHeight] = useState(window.innerHeight);
   useEffect(() => {
@@ -26,7 +42,7 @@ export default function App() {
 
   if (locationSelectionState) {
     return (
-      <div className="relative max-h-screen m-auto" style={{"max-width": height*2520/2170}}>
+      <div className="relative max-h-screen m-auto" style={{"maxWidth": height*2520/2170}}>
         {gameState === "start" && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 text-white text-center text-3xl font-bold cursor-poke-full">
             <button
@@ -48,7 +64,8 @@ export default function App() {
                   "cursor-poke-full transition-transform transform hover:scale-110"
                 }
                 onClick={() => {
-                  setGameState("on");
+                  setGameState("on")
+                  setPocket([2,6,7]);
                 }}
               >
                 START A NEW GAME
@@ -57,7 +74,7 @@ export default function App() {
           </div>
         )}
         <>
-          {/*<Pocket pocket={pocket} fightState={fightState} onSelect={() => {}} />*/}
+          <Pocket pocket={pocket} fightState={fightState} onSelect={() => {}} />
           <Map
             onSelectLocation={(n, name) => {
               setActiveLocationNumber(n);
@@ -72,7 +89,7 @@ export default function App() {
   }
   if (fightState) {
     return (
-      <div>
+      <div className="relative h-screen m-auto" style={{"maxWidth": height*2520/2170, background: backgroundColor}}>
         <Pocket
           pocket={pocket}
           fightState={fightState}
