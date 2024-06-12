@@ -28,7 +28,7 @@ export default function App() {
   if (locationSelectionState) {
     return (
       <div
-        className="relative h-screen m-auto content-center"
+        className="relative h-screen bg-white m-auto content-center"
         style={{ maxWidth: (height * 2520) / 2170 }}
       >
         {gameState === "start" && (
@@ -91,56 +91,58 @@ export default function App() {
         className="relative h-screen m-auto mb-0 content-center"
         style={{
           maxWidth: (height * 2520) / 2170,
-          background: gifColor[activeLocationNumber - 1],
+          backgroundImage: `linear-gradient(to bottom, ${
+            gifColor[activeLocationNumber - 1]
+          } 50%, ${gifColorBottom[activeLocationNumber - 1]} 50%)`,
         }}
       >
         <>
-        <img
-          src={pngUrl}
-          alt="Pokemon"
-          className="absolute top-1 right-1/2 transform translate-x-1/2 z-10 w-[200px]"
-        />
-        <Fight
-          onClose={(newPocket) => {
-            setPocket([...newPocket]);
-            setFightState("stop");
-            setLocationSelectionState(true);
-            setSelectedPokemonId(0);
-            if (newPocket.length === 0) {
-              setGameState("gameover");
-            }
-          }}
-          selectedPokemonId={selectedPokemonId}
-          activeLocationNumber={activeLocationNumber}
-          activeLocationName={activeLocations}
-          pocket={pocket}
-          fightState={fightState}
-          onFightState={(fightState) => {
-            setFightState(fightState);
-          }}
-        />
-        <Pocket
-          pocket={pocket}
-          fightState={fightState}
-          onSelect={(id) => {
-            setSelectedPokemonId(id);
-            if (fightState === "select" && selectedPokemonId === 0) {
-              setPocket([
-                ...pocket.filter((item) => {
-                  return item !== id;
-                }),
-              ]);
-            } else if (fightState === "select" && selectedPokemonId !== 0) {
-              setPocket([
-                ...pocket.filter((item) => {
-                  return item !== id;
-                }),
-                selectedPokemonId,
-              ]);
-            }
-          }}
-        />
-         </>
+          <img
+            src={pngUrl}
+            alt="Pokemon"
+            className="absolute top-1 right-1/2 transform translate-x-1/2 z-10 w-[200px]"
+          />
+          <Fight
+            onClose={(newPocket) => {
+              setPocket([...newPocket]);
+              setFightState("stop");
+              setLocationSelectionState(true);
+              setSelectedPokemonId(0);
+              if (newPocket.length === 0) {
+                setGameState("gameover");
+              }
+            }}
+            selectedPokemonId={selectedPokemonId}
+            activeLocationNumber={activeLocationNumber}
+            activeLocationName={activeLocations}
+            pocket={pocket}
+            fightState={fightState}
+            onFightState={(fightState) => {
+              setFightState(fightState);
+            }}
+          />
+          <Pocket
+            pocket={pocket}
+            fightState={fightState}
+            onSelect={(id) => {
+              setSelectedPokemonId(id);
+              if (fightState === "select" && selectedPokemonId === 0) {
+                setPocket([
+                  ...pocket.filter((item) => {
+                    return item !== id;
+                  }),
+                ]);
+              } else if (fightState === "select" && selectedPokemonId !== 0) {
+                setPocket([
+                  ...pocket.filter((item) => {
+                    return item !== id;
+                  }),
+                  selectedPokemonId,
+                ]);
+              }
+            }}
+          />
+        </>
       </div>
     );
   }

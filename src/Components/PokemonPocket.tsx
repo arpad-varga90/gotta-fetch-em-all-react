@@ -40,7 +40,7 @@ export default function PokemonPocket({
               }
               alt={data.name}
             />
-                      <p className={`m-0 text-base ${isVisible ? "visible" : "invisible"}`}>
+                      <p className={`m-0 text-base text-slate-400 ${isVisible ? "visible" : "invisible"}`}>
             {data.name}
           </p>
           </div>
