@@ -30,7 +30,7 @@ export default function Fight({
 
 
   return (
-    <div className="text-black relative top-20  ">
+    <div className="text-black relative z-10 ">
       <img
         src={gifUrl[activeLocationNumber - 1]}
         alt="background"
