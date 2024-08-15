@@ -8,7 +8,7 @@ export default function PokemonMain({
   pokemonById: PokemonDetails;
   newHP: number;
 }) {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible] = useState(true);
 
   return (
     <div className="card justify-between bg-slate-50/75">
