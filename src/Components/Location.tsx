@@ -31,7 +31,7 @@ export default function Location({
     setLocationCard(
       <span
         onClick={() => onSelectLocation(query.data?.names[1].name as string)}
-        className="text-white	text-2xl bg-red-700 p-2 z-10 cursor-poke-full"
+        className=" text-white	text-2xl bg-red-700 p-2 cursor-poke-full"
       >
         {query.data?.names[1].name}
       </span>
@@ -57,8 +57,8 @@ export default function Location({
       }}
     >
       <div onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
-        <span className="text-xl">{pointer}</span>
         {locationCard}
+        <span className="text-xl ">{pointer}</span>
       </div>
     </div>
   );

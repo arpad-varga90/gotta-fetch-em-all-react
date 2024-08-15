@@ -6,6 +6,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white !important;
 }
 
 @tailwind base;
@@ -18,7 +19,7 @@
   }
 
   .load-info {
-    @apply flex bg-blue-100 rounded-lg text-blue-900 justify-center items-center;
+    @apply flex  bg-slate-50/75 rounded-lg text-black justify-center items-center;
   }
 
   .poke-details-header {
@@ -34,6 +35,6 @@
   }
 
   .custom-pointer {
-    cursor: url('./assets/mousePointer/icon-empty.png');
+    cursor: url("./assets/mousePointer/icon-empty.png");
   }
 }

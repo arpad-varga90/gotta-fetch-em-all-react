@@ -1,21 +1,22 @@
-import { useState } from "react";
 import { PokemonDetails } from "../Types/types";
 
 export default function PokemonMain({
   pokemonById,
   newHP,
+  fightState,
 }: {
   pokemonById: PokemonDetails;
   newHP: number;
+  fightState: string;
 }) {
-  const [isVisible] = useState(true);
-
   return (
-    <div className="card justify-between bg-slate-50/75">
+    <div className="card justify-between h-90 bg-slate-50/75">
       {/* Name */}
-      <h1 className="poke-details-header">{pokemonById.name.toUpperCase()}</h1>
+      <h1 className={`poke-details-header `}>
+        {pokemonById.name.toUpperCase()}
+      </h1>
       {/* Image */}
-      <div className="bg-blue-100 rounded-lg h-40 p-2 mx-4">
+      <div className={`bg-blue-100 rounded-lg h-40 p-2 mx-4`}>
         {pokemonById.sprites.other.dream_world.front_default ? (
           <img
             src={pokemonById.sprites.other.dream_world.front_default}
@@ -35,7 +36,7 @@ export default function PokemonMain({
       {/* Stats */}
       <div
         className={`grid grid-cols-1 my-6 mx-8 ${
-          isVisible ? "visible" : "invisible"
+          fightState === "select" ? "invisible" : "visible"
         }`}
       >
         <div className="text-center pb-4">Details</div>
